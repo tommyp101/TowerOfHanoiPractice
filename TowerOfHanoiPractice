@@ -1,3 +1,47 @@
 # Tower of Hanoi
-# G = (V, E) V = {Start, Aux1, Dest, Aux2} E = {(Start, Aux1), (Aux2, Aux2), (Aux2, Dest), (Dest, Aux1) }
+# G = (V, E) V = {Start, Aux1, Dest, Aux2} E = {(Start, Aux1), (Aux1, Aux2), (Aux2, Dest), (Dest, Aux1) }
 # Analysis - Start -> a1 -> a2 -> d -> a1
+
+# Create H1 function (Simple move using 1 disk) No recursion
+def move(s, d, n):
+    print("Move disk", n, s, d)
+
+# Create H2 Function (Moves a stack of disks to the end of the cycle) Recursion one time
+# ONE MOVE PARAMETERS - (START, END, AUX, N)
+# TWO MOVE PARAMETERS - (START, AUX, END, N)
+def SToD(S, A1, A2, D, n):
+    if n == 1:
+        move(S, A1)
+        move(A1, A2)
+        move(A2, D)
+    # ignore aux2
+    elif n>1:
+        SToD(S, A1, A2, D, n-1)
+        move(S, A1, n)
+        move(A1, A2, n)
+        OneHop(D, A1, A2, n-1)
+        move(A2, D, n)
+        TwoHop(A1, A2, D, n-1)
+
+def OneHop(S, A1, D, n):
+    if n == 1:
+        move(S, A1)
+    elif n>1:
+        TwoHop(S, A1, D, n-1)
+        move(S, A1)
+        TwoHop(D, S, A1, n-1)
+
+def TwoHop(S, A1, D, n):
+    if n == 1:
+        move(S, A1)
+        move(A1, D)
+    elif n > 1:
+        TwoHop(S, A1, D, n-1)
+        move(S, A1, n)
+        OneHop(D, S, A1, n-1)
+        move(A1, D, n)
+        TwoHop(S, A1, D, n-1)
+
+SToD("S", "A1", "A2", "D", 3)
+
+        
