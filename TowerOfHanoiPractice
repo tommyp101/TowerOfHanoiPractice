@@ -11,9 +11,9 @@ def move(s, d, n):
 # TWO MOVE PARAMETERS - (START, AUX, END, N)
 def SToD(S, A1, A2, D, n):
     if n == 1:
-        move(S, A1)
-        move(A1, A2)
-        move(A2, D)
+        move(S, A1, n)
+        move(A1, A2, n)
+        move(A2, D, n)
     # ignore aux2
     elif n>1:
         SToD(S, A1, A2, D, n-1)
@@ -25,16 +25,16 @@ def SToD(S, A1, A2, D, n):
 
 def OneHop(S, A1, D, n):
     if n == 1:
-        move(S, A1)
+        move(S, A1, n)
     elif n>1:
         TwoHop(S, A1, D, n-1)
-        move(S, A1)
+        move(S, A1, n)
         TwoHop(D, S, A1, n-1)
 
 def TwoHop(S, A1, D, n):
     if n == 1:
-        move(S, A1)
-        move(A1, D)
+        move(S, A1, n)
+        move(A1, D, n)
     elif n > 1:
         TwoHop(S, A1, D, n-1)
         move(S, A1, n)
