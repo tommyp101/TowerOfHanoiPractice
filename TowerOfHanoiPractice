@@ -43,7 +43,7 @@ def TwoHop(S, A1, D, n):
         TwoHop(S, A1, D, n-1)
 
 # Tower of Hanoi
-# G = (V, E) V = {Start, Aux1, Dest, Aux2} E = {(Start, Aux1), (Aux1, Aux2), (Aux2, Dest), (Dest, Aux1) }
+# G = (V, E) V = {Start, Dest, Aux1, Aux2} E = {(Start, Aux1), (Aux1, Aux2), (Aux2, Dest), (Dest, Aux1) }
 # Analysis - Start -> a1 -> a2 -> d -> a1
 def SToD1(S, A1, A2, D, n):
     if n==1:
@@ -68,7 +68,28 @@ def TwoHop1(S, A1, A2, D, n):
 # SToD("S", "A1", "A2", "D", 3)
 
 # variation 2
-SToD1("S", "D", "A1", "A2", 3)
+# SToD1("S", "D", "A1", "A2", 3)
 
 # variation 3
-SToD2()
+def SToD2(S, A1, A2, D, n):
+    if n == 1:
+        move(S, A1, n)
+        move(A1, A2, n)
+    elif n > 1:
+        TwoHop2(S, A1, A2, D, n-1)
+        move(S, A1, n)
+        TwoHop2(A2, D, S, A1, n-1)
+        move(A1, A2, n)
+        TwoHop2(S, A1, A2, D, n-1)
+def TwoHop2(S, A1, A2, D, n):
+    if n == 1:
+        move(S,A1, n)
+        move(A, A2, n)
+    elif n > 1:
+        TwoHop2(S, A1, A2, D, n-1)
+        move(S, A1, n)
+        TwoHop2(A2, D, S, A1, n-1)
+        move(S, A2, n)
+        TwoHop2(S, A1, A2, D, n-1)
+
+SToD2(("S", "A1", "D", "A2"))
