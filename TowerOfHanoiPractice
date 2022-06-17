@@ -42,6 +42,29 @@ def TwoHop(S, A1, D, n):
         move(A1, D, n)
         TwoHop(S, A1, D, n-1)
 
-SToD("S", "A1", "A2", "D", 3)
+def SToD1(S, A1, A2, D, n):
+    if n==1:
+        move(S, A1, n)
+    elif n > 1:
+        TwoHop1(S, A1, A2, D, n-1) # 3rd parameter is the dest
+        move(S, A1, n)
+        TwoHop1(D, S, A1, A2, n-1)
+def TwoHop1(S, A1, A2, D, n):
+    if n == 1:
+        move(S, A1, n)
+        move(A1, A2, n)
+    elif n > 1:
+        TwoHop1(S, A1, A2, D, n-1)
+        move(S, A1, n)
+        TwoHop1(A2, D, S, A1, n-1)
+        move(A1, A2, n)
+        TwoHop1(S, A1, A2, D, n-1)
+
+
+# variation 1
+# SToD("S", "A1", "A2", "D", 3)
+
+# variation 2
+SToD1("S", "D", "A1", "A2", 3)
 
         
